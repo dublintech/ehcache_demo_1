@@ -4,7 +4,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ehcachedemo.dao.HibernateUtil;
-import com.ehcachedemo.dao.ServerDAO;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.engine.SessionFactoryImplementor;
@@ -34,11 +33,6 @@ public class TestRunner {
 		testRunner.testHibernate_EH_Cache();
 	}
 
-	public void setUpServers() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-jpa.xml");
-		TestServerDAO testServerDAO = (TestServerDAO)context.getBean("testServerDAO");
-		testServerDAO.setUpNonCachedServers();
-	}
 	
 	public void testHibernate_EH_Cache() {
 		// output cache name
@@ -60,9 +54,4 @@ public class TestRunner {
 		HibernateUtil.getSessionFactory().close();
 	}
 	
-	public void testJPA_EH_Cache() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-jpa.xml");
-		TestServerDAO testServerDAO = (TestServerDAO)context.getBean("testServerDAO");
-		testServerDAO.testListAllServers();
-	}
 }
